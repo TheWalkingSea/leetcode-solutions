@@ -37,6 +37,16 @@
 
 class Solution {
     public int maximumCandies(int[] candies, long k) {
-        
+        int min = candies[0];
+        for (int i = 1; i < candies.length; i++) {
+            if (candies[i] < min) {
+                min = candies[i];
+            }
+        }
+
+        if (k > min) {
+            return 0;
+        }
+        return min - (int)(min % k);
     }
 }
