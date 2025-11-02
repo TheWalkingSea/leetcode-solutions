@@ -38,10 +38,60 @@
 // 	1 <= m, n <= 200
 // 	0 <= matrix[i][j] <= 2³¹ - 1
 // 
- 
+
+import java.util.Objects;
 
 class Solution {
+    private class Point {
+        int i;
+        int j;
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(i, j);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            Point point = (Point) o;
+            return point.i == i && point.j == j;
+        }
+    }
     public int longestIncreasingPath(int[][] matrix) {
         
+        int[][] dp = new int[matrix.length][matrix[0].length];
+
+        int mini = 0;
+        int minj = 0;
+        int min = matrix[0][0];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] < min) {
+                    min = matrix[i][j];
+                }
+            }
+        }
+
+        // Set min to 0
+        dp[mini][minj] = 0;
+
+        int maxPathLength = 0;
+
+        Queue<Point> traversalQueue = new Queue<>();
+        traversalQueue.add(new Point(mini, minj));
+
+        Set<Point> visited = new HashSet<>();
+        visited.add(new Point(mini, minj));
+
+        while (!traversalQueue.isEmpty()) {
+            Point nextCell = traversalQueue.poll();
+
+            int celli = nextCell.i;
+            int cellj = nextCell.j;
+
+            if (matrix[celli][cellj] == )
+
+        }
     }
 }
