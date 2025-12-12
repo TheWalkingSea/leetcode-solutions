@@ -45,9 +45,44 @@
 // 	0 <= capital[i] <= 10⁹
 // 
  
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
 
 class Solution {
+    static class Node {
+        int capital;
+        int profit;
+
+        public Node(int capital, int profit) {
+            this.capital = capital;
+            this.profit = profit;
+        }
+    }
     public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
-        
+        List<Node> nodes = new ArrayList<>(capital.length);
+
+        for (int i = 0; i < capital.length; i++) {
+            nodes.add(new Node(capital[i], profits[i]));
+        }
+
+        PriorityQueue<Node> minheap = new PriorityQueue<>((a, b) -> Integer.compare(a.capital, b.capital));
+        minheap.addAll(nodes);
+
+
+        PriorityQueue<Node> maxheap = new PriorityQueue<>((a, b) -> -1 * Integer.compare(a.profit, b.profit));
+
+        int currentcap = w;
+
+        for (int numprojects = k; numprojects > 0; numprojects--) {
+
+            while (!minheap.isEmpty() && minheap.peek().capital <= currentcap) {
+                maxheap.add(minheap.poll());
+            }
+
+            currentcap += maxheap.poll().profit;
+        }
+
+        return currentcap - w;
     }
 }
