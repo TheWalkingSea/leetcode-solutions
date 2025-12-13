@@ -83,6 +83,6 @@ class Solution {
             currentcap += maxheap.poll().profit;
         }
 
-        return currentcap - w;
+        return currentcap;
     }
 }

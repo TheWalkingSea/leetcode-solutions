@@ -32,7 +32,24 @@
  
 
 class Solution {
+
+    private void swap(int[][] matrix, int layer, int i, int j, int i2, int j2) {
+        i += layer;
+        j += layer;
+        i2 += layer;
+        j2 += layer;
+        int val = matrix[i2][j2];
+        matrix[i2][j2] = matrix[i][j];
+        matrix[i][j] = val;
+    }
     public void rotate(int[][] matrix) {
-        
+        for (int layer = 0; layer < (matrix.length - 1) / 2; layer++) {
+            int n = matrix.length - 2 * layer; // Halves each layer
+            for (int i = 0; i < n; i++) {
+                swap(matrix, layer, i, 0, n - 1, i);
+                swap(matrix, layer, n - 1, i, n - 1 - i, n - 1);
+                swap(matrix, layer, n - 1 - i, n - 1, 0, i);
+            }
+        }
     }
 }
