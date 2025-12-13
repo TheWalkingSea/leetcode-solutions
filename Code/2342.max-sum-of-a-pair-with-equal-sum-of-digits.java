@@ -33,10 +33,39 @@
 // 	1 <= nums.length <= 10⁵
 // 	1 <= nums[i] <= 10⁹
 // 
- 
 
+import java.util.HashMap;
+import java.util.Map;
 class Solution {
     public int maximumSum(int[] nums) {
-        
+        Map<Integer, Integer> map = new HashMap<>();
+
+        int maxnum = -1;
+
+        for (int i = 0; i < nums.length; i++) {
+            int sum = 0;
+            int num = nums[i];
+            int multiple = 1;
+            while (num / multiple != 0) {
+                sum += (num / multiple) % 10;
+                multiple *= 10;
+            }
+
+            if (!map.containsKey(sum)) {
+                map.put(sum, num);
+                continue;
+            }
+
+            // sum already in map
+            int mapnum = map.get(sum);
+            if (num + mapnum > maxnum) {
+                maxnum = num + mapnum;
+            }
+            if (num > mapnum) {
+                map.put(sum, num); // replace with a larger number
+            }
+        }
+
+        return maxnum;
     }
 }
