@@ -42,9 +42,28 @@
 // 	queries[i] and pattern consist of English letters.
 // 
  
+import java.util.*;
 
 class Solution {
     public List<Boolean> camelMatch(String[] queries, String pattern) {
+
+        List<Boolean> answers = new ArrayList<>(queries.length);
+
+        for (int i = 0; i < queries.length; i++) {
+            String query = queries[i];
+            int j = 0;
+            for (Character curr : query.toCharArray()) {
+                if (j != pattern.length() && curr.equals(pattern.charAt(j))) {
+                    j++;
+                } else if (Character.isUpperCase(curr)) {
+                    j = -1;
+                    break;
+                }
+            }
+            answers.add(j == pattern.length());
+
+        }
+        return answers;
         
     }
 }
