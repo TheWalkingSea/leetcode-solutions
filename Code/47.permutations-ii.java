@@ -30,9 +30,23 @@
 // 	-10 <= nums[i] <= 10
 // 
  
-
+import java.util.*;
 class Solution {
+    private void permuteUnique(sequence, Set<Integer> visited, List<Integer> nums) {
+        for (int i = 0; i < nums.size(); i++) {
+            Integer curr = nums.get(i);
+            if (visited.contains(curr)) {
+                continue;
+            }
+
+            nums.remove(i);
+            visited.add(curr);
+            
+            
+        }
+    }
+
     public List<List<Integer>> permuteUnique(int[] nums) {
-        
+
     }
 }
