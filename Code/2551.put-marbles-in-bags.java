@@ -44,10 +44,25 @@
 // 	1 <= k <= weights.length <= 10⁵
 // 	1 <= weights[i] <= 10⁹
 // 
- 
+import java.util.*;
 
 class Solution {
     public long putMarbles(int[] weights, int k) {
-        
+        PriorityQueue<Integer> minpq = new PriorityQueue<>();
+        PriorityQueue<Integer> maxpq = new PriorityQueue<>();
+
+        for (int i = 0; i < weights.length - 1; i++) {
+            int boundary = weights[i] + weights[i+1];
+            minpq.add(boundary);
+            maxpq.add(-1 * boundary);
+        }
+
+        long difference = 0;
+        for (int i = 0; i < k - 1 && !minpq.isEmpty(); i++) {
+            difference += minpq.poll();
+            difference += maxpq.poll();
+        }
+
+        return -1 * difference;
     }
 }
